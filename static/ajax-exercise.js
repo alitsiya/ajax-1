@@ -42,7 +42,17 @@ function orderMelons(evt) {
     evt.preventDefault();
 
     // TODO: show the result message after your form
+    var formInputs = {
+        "melon_type": $("#melon-type-field").val(),
+        "qty": $("#qty-field").val()
+    };
+    $.post('/order-melons.json',formInputs, printHandler);
+
     // TODO: if the result code is ERROR, make it show up in red (see our CSS!)
+}
+
+function printHandler(result) {
+    $('#order-status').html(result.code+" " + result.msg);
 }
 
 $("#order-form").on('submit', orderMelons);
